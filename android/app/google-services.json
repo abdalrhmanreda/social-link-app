@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "567172814992",
+    "project_id": "social-link-app-aa5ff",
+    "storage_bucket": "social-link-app-aa5ff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:567172814992:android:c897a390f75bb75ac8a015",
+        "android_client_info": {
+          "package_name": "com.example.social_link_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDt6ShLRErmyWzA3u4ZPWnEVIENlPiaDu0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
