@@ -23,24 +23,8 @@ class RegisterScreenBody extends StatelessWidget {
   var formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    var emailController = TextEditingController();
-    var passController = TextEditingController();
-    var nameController = TextEditingController();
-    var phoneController = TextEditingController();
     return BlocConsumer<AuthCubit, AuthState>(
-      listener: (context, state) {
-        // TODO: implement listener
-        if (state is GetUserDataSuccessState) {
-          // showToast(
-          //   message: 'Created account successfully',
-          //   state: ToastState.SUCCESS,
-          // );
-          // ApiConstant.token = state.token;
-          CustomNavigation.navigateByNamedTo(context, RoutePath.layout);
-        } else if (state is FailureState) {
-          // showToast(message: state.error, state: ToastState.ERROR);
-        }
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return SingleChildScrollView(
           child: Center(
@@ -70,20 +54,20 @@ class RegisterScreenBody extends StatelessWidget {
                       ),
                       const Gap(30),
                       TitleAndTextFormFeild(
-                        nameController: nameController,
+                        nameController: AuthCubit.get(context).nameController,
                         title: S.of(context).registerFullName,
                         hint: 'xxxxxxxxx',
                       ),
                       const Gap(20),
                       TitleAndTextFormFeild(
-                        nameController: phoneController,
+                        nameController: AuthCubit.get(context).phoneController,
                         title: 'Phone',
                         hint: '+20100000000',
                       ),
                       const Gap(20),
                       CustomTwoTextFromField(
-                        firstController: emailController,
-                        secondController: passController,
+                        firstController: AuthCubit.get(context).emailController,
+                        secondController: AuthCubit.get(context).passController,
                         firstHint: S.of(context).loginScreenEmail,
                         secondHint: S.of(context).loginScreenPass,
                       ),
@@ -93,11 +77,8 @@ class RegisterScreenBody extends StatelessWidget {
                         builder: (context) => CustomButton(
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
-                              AuthCubit.get(context).userRegister(
-                                  email: emailController.text,
-                                  password: passController.text,
-                                  name: nameController.text,
-                                  phone: phoneController.text);
+                              CustomNavigation.navigateByNamedTo(
+                                  context, RoutePath.completeProfile);
                             }
                           },
                           text: S.of(context).signUp,

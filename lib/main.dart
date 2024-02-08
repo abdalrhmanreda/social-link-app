@@ -45,7 +45,7 @@ class LinkApp extends StatelessWidget {
           ],
           child: SafeArea(
             child: MaterialApp(
-              initialRoute: RoutePath.layout,
+              initialRoute: RoutePath.login,
               onGenerateRoute: generateRoute,
               locale: const Locale('en', 'US'),
               localizationsDelegates: const [

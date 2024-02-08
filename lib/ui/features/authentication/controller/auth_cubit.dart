@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/cache/hive_cache.dart';
 import '../../../../core/constant/strings.dart';
@@ -12,6 +16,13 @@ part 'auth_state.dart';
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
   static AuthCubit get(context) => BlocProvider.of(context);
+  var addressController = TextEditingController();
+  var emailController = TextEditingController();
+  var passController = TextEditingController();
+  var nameController = TextEditingController();
+  var phoneController = TextEditingController();
+  String profileBlankImage =
+      'https://img.freepik.com/free-vector/isolated-young-handsome-man-set-different-poses-white-background-illustration_632498-649.jpg?w=740&t=st=1707406336~exp=1707406936~hmac=9da05bc201714d21acbc0f6a462f22bdc59d34670ddce46b897d60c00093be05';
 
   void userLogin({
     required String email,
@@ -38,16 +49,13 @@ class AuthCubit extends Cubit<AuthState> {
     });
   }
 
-  void userRegister(
-      {required String email,
-      required String password,
-      required String name,
-      required String phone}) {
+  void userRegister() {
     emit(LoadingState());
     FirebaseAuth.instance
-        .createUserWithEmailAndPassword(email: email, password: password)
+        .createUserWithEmailAndPassword(
+            email: emailController.text, password: passController.text)
         .then((value) {
-      createUser(email: email, name: name, uId: value.user!.uid, phone: phone);
+      uploadImage(uId: value.user!.uid);
       HiveCache.saveData(key: 'userId', value: value.user!.uid);
       userId = value.user!.uid;
     }).catchError((error) {
@@ -60,14 +68,20 @@ class AuthCubit extends Cubit<AuthState> {
     required String name,
     required String phone,
     required String uId,
+    required String address,
+    required String profileImage,
+    String? coverImage,
+    String? bio,
   }) {
     UserModel userModel = UserModel(
-      name: name,
       email: email,
-      profileImage:
-          'https://cdn1.iconfinder.com/data/icons/user-pictures/100/unknown-512.png',
+      name: name,
       phone: phone,
-      address: 'Assuit , Egypt',
+      uId: uId,
+      address: address,
+      profileImage: profileImage,
+      coverImage: profileBlankImage,
+      bio: '',
     );
     emit(LoadingState());
 
@@ -102,70 +116,76 @@ class AuthCubit extends Cubit<AuthState> {
     });
   }
 
-  // File? profilePhoto;
-  // final picker = ImagePicker();
-  //
-  // Future<void> getProfileImage() async {
-  //   final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-  //   if (pickedFile != null) {
-  //     profilePhoto = File(pickedFile.path);
-  //     emit(PickProfileImageSuccessState());
-  //   } else {
-  //     print('No Image Selected');
-  //     emit(FailureState(error: 'error'));
-  //   }
-  // }
-  //
-  // void uploadImage({
-  //   String? name,
-  //   String? email,
-  //   String? phone,
-  //   String? address,
-  // }) {
-  //   emit(LoadingState());
-  //   firebase_storage.FirebaseStorage.instance
-  //       .ref()
-  //       .child('users/${Uri.file(profilePhoto!.path).pathSegments.last}')
-  //       .putFile(profilePhoto!)
-  //       .then((p0) {
-  //     p0.ref.getDownloadURL().then((value) {
-  //       updateUserData(
-  //           name: name,
-  //           profileImage: value,
-  //           address: address,
-  //           phone: phone,
-  //           email: email);
-  //       emit(UploadProfileImageSuccessState());
-  //     });
-  //   }).catchError((error) {
-  //     emit(FailureState(error: error.toString()));
-  //   });
-  // }
-  //
-  // void updateUserData({
-  //   String? name,
-  //   String? email,
-  //   String? phone,
-  //   String? address,
-  //   String? profileImage,
-  // }) {
-  //   UserModel model = UserModel(
-  //     name: name,
-  //     email: email,
-  //     phone: phone,
-  //     address: address,
-  //     profileImage: profileImage ?? userModel!.profileImage,
-  //   );
-  //   emit(LoadingState());
-  //   FirebaseFirestore.instance
-  //       .collection('users')
-  //       .doc(userId)
-  //       .update(model.toJson())
-  //       .then((value) {
-  //     getUserData(userId: userId!);
-  //     emit(UpdateUserDataSuccessState());
-  //   }).catchError((error) {
-  //     emit(FailureState(error: error.toString()));
-  //   });
-  // }
+  File? profilePhoto;
+  final picker = ImagePicker();
+  Future<void> getProfileImage() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      profilePhoto = File(pickedFile.path);
+      emit(PickProfileImageSuccessState());
+    } else {
+      print('No Image Selected');
+      emit(FailureState(error: 'error'));
+    }
+  }
+
+  void uploadImage({
+    String? uId,
+  }) {
+    emit(LoadingState());
+    firebase_storage.FirebaseStorage.instance
+        .ref()
+        .child('users/$uId/${Uri.file(profilePhoto!.path).pathSegments.last}')
+        .putFile(profilePhoto!)
+        .then((p0) {
+      p0.ref.getDownloadURL().then((value) {
+        createUser(
+          email: emailController.text,
+          name: nameController.text,
+          phone: phoneController.text,
+          uId: uId!,
+          address: addressController.text,
+          profileImage: value,
+        );
+        emit(UploadProfileImageSuccessState());
+      });
+    }).catchError((error) {
+      emit(FailureState(error: error.toString()));
+    });
+  }
+
+  void updateUserData({
+    String? name,
+    String? email,
+    String? phone,
+    String? address,
+    String? profileImage,
+  }) {
+    UserModel model = UserModel(
+      name: name,
+      email: email,
+      phone: phone,
+      address: address,
+      profileImage: profileImage ?? userModel!.profileImage,
+    );
+    emit(LoadingState());
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .update(model.toJson())
+        .then((value) {
+      getUserData(userId: userId!);
+      emit(UpdateUserDataSuccessState());
+    }).catchError((error) {
+      emit(FailureState(error: error.toString()));
+    });
+  }
+
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    passController.dispose();
+    phoneController.dispose();
+    addressController.dispose();
+  }
 }
