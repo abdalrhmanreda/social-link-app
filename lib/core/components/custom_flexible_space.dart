@@ -28,7 +28,7 @@ class CustomFlexibleSpaceBar extends StatelessWidget {
             image: CachedNetworkImageProvider(
               image,
             ),
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
           ),
         ),
       ),

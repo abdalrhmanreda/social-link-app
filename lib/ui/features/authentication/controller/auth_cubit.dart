@@ -3,8 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../../core/cache/hive_cache.dart';
-import '../../../core/constant/strings.dart';
+import '../../../../core/cache/hive_cache.dart';
+import '../../../../core/constant/strings.dart';
 import '../models/user_model.dart';
 
 part 'auth_state.dart';

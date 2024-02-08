@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/components/custom_text_button.dart';
+import '../../../../../core/components/custom_text_button.dart';
 
 Widget customTextNextToTextButton({
   required BuildContext context,
@@ -15,7 +15,7 @@ Widget customTextNextToTextButton({
         Text(
           text,
           style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                fontSize: 17.sp,
+                fontSize: 15.sp,
                 fontWeight: FontWeight.w500,
               ),
         ),
@@ -24,7 +24,7 @@ Widget customTextNextToTextButton({
             onPressed?.call();
           },
           text: textButton,
-          fontSize: 17.sp,
+          fontSize: 15.sp,
         ),
       ],
     );

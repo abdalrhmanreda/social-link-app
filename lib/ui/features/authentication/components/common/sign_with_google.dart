@@ -24,7 +24,7 @@ class SignWithGoogle extends StatelessWidget {
           style: Theme.of(context)
               .textTheme
               .bodyMedium!
-              .copyWith(fontSize: 17.sp, fontWeight: FontWeight.w500),
+              .copyWith(fontSize: 15.sp, fontWeight: FontWeight.w500),
         ),
       ],
     );
