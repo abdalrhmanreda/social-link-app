@@ -1,6 +1,6 @@
 class AppColors {
-  static const int kSplashColor = 0xff0070fc;
-  static const int kPrimaryColor = 0xff0085c3;
+  static const int kSplashColor = 0xfff9622e;
+  static const int kPrimaryColor = 0xfff9622e;
   static const int kGoldColor = 0xffffae00;
   static const int kWhiteColor = 0xffffffff;
   static const int kBlackColor = 0xff000000;
@@ -15,4 +15,5 @@ class AppColors {
   static const int kOnBoardingDesc = 0xffD8D8D8;
   static const int kPriceColor = 0xff6A6A6A;
   static const int kIconMap = 0xff0070fc;
+  static const int konBoardingAppBarColor = 0xfff6f6f6;
 }

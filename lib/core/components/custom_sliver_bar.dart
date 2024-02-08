@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:social_link_app/ui/features/layout/components/profile_action_item.dart';
 
 import 'custom_flexible_space.dart';
 
@@ -14,24 +15,15 @@ class CustomSliverAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       pinned: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          bottomRight: Radius.circular(15),
-          bottomLeft: Radius.circular(15),
+      backgroundColor: Colors.transparent,
+      actions: const [
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: ProfileActionItem(),
         ),
-      ),
-      backgroundColor: const Color(0xff303030),
-      leading: IconButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        icon: const Icon(
-          color: Colors.grey,
-          Icons.arrow_back_ios_new_outlined,
-          size: 30,
-        ),
-      ),
+      ],
       expandedHeight: height,
+      automaticallyImplyLeading: true,
       flexibleSpace: CustomFlexibleSpaceBar(
         image: image,
       ),

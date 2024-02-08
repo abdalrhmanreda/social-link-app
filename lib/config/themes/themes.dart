@@ -17,7 +17,7 @@ class Style {
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.white,
       elevation: 0,
-      titleTextStyle: GoogleFonts.aBeeZee(
+      titleTextStyle: GoogleFonts.rubik(
         color: Colors.black,
         fontSize: 16.sp,
       ),
@@ -31,45 +31,45 @@ class Style {
     ),
     textTheme: TextTheme(
       bodyLarge: isArabic()
-          ? GoogleFonts.elMessiri(
+          ? GoogleFonts.rubik(
               color: Colors.black,
             )
-          : GoogleFonts.aBeeZee(
+          : GoogleFonts.rubik(
               color: Colors.black,
             ),
       bodyMedium: isArabic()
-          ? GoogleFonts.elMessiri(
+          ? GoogleFonts.rubik(
               color: Colors.black,
             )
-          : GoogleFonts.aBeeZee(
+          : GoogleFonts.rubik(
               color: Colors.black,
             ),
       bodySmall: isArabic()
-          ? GoogleFonts.elMessiri(
+          ? GoogleFonts.rubik(
               color: Colors.black,
             )
-          : GoogleFonts.aBeeZee(
+          : GoogleFonts.rubik(
               color: Colors.black,
             ),
       titleLarge: isArabic()
-          ? GoogleFonts.elMessiri(
+          ? GoogleFonts.rubik(
               color: Colors.black,
             )
-          : GoogleFonts.aBeeZee(
+          : GoogleFonts.rubik(
               color: Colors.black,
             ),
       titleMedium: isArabic()
-          ? GoogleFonts.elMessiri(
+          ? GoogleFonts.rubik(
               color: Colors.black,
             )
-          : GoogleFonts.aBeeZee(
+          : GoogleFonts.rubik(
               color: Colors.black,
             ),
       titleSmall: isArabic()
-          ? GoogleFonts.elMessiri(
+          ? GoogleFonts.rubik(
               color: Colors.black,
             )
-          : GoogleFonts.aBeeZee(
+          : GoogleFonts.rubik(
               color: Colors.black,
             ),
     ),
@@ -89,12 +89,12 @@ class Style {
       style: ButtonStyle(
         textStyle: MaterialStateProperty.all(
           isArabic()
-              ? GoogleFonts.elMessiri(
+              ? GoogleFonts.rubik(
                   color: const Color(
                     AppColors.kPrimaryColor,
                   ),
                 )
-              : GoogleFonts.aBeeZee(
+              : GoogleFonts.rubik(
                   color: const Color(
                     AppColors.kPrimaryColor,
                   ),
@@ -125,7 +125,7 @@ class Style {
       // backgroundColor: const Color(AppColors.kDarkThemColor),
       elevation: 0,
       backgroundColor: const Color(AppColors.appBarColor),
-      titleTextStyle: GoogleFonts.aBeeZee(
+      titleTextStyle: GoogleFonts.rubik(
         color: Colors.white,
         fontSize: 18.sp,
       ),
@@ -142,45 +142,45 @@ class Style {
     ),
     textTheme: TextTheme(
       bodyLarge: isArabic()
-          ? GoogleFonts.elMessiri(
+          ? GoogleFonts.rubik(
               color: Colors.black,
             )
-          : GoogleFonts.aBeeZee(
+          : GoogleFonts.rubik(
               color: Colors.black,
             ),
       bodyMedium: isArabic()
-          ? GoogleFonts.elMessiri(
+          ? GoogleFonts.rubik(
               color: Colors.black,
             )
-          : GoogleFonts.aBeeZee(
+          : GoogleFonts.rubik(
               color: Colors.black,
             ),
       bodySmall: isArabic()
-          ? GoogleFonts.elMessiri(
+          ? GoogleFonts.rubik(
               color: Colors.black,
             )
-          : GoogleFonts.aBeeZee(
+          : GoogleFonts.rubik(
               color: Colors.black,
             ),
       titleLarge: isArabic()
-          ? GoogleFonts.elMessiri(
+          ? GoogleFonts.rubik(
               color: Colors.black,
             )
-          : GoogleFonts.aBeeZee(
+          : GoogleFonts.rubik(
               color: Colors.black,
             ),
       titleMedium: isArabic()
-          ? GoogleFonts.elMessiri(
+          ? GoogleFonts.rubik(
               color: Colors.black,
             )
-          : GoogleFonts.aBeeZee(
+          : GoogleFonts.rubik(
               color: Colors.black,
             ),
       titleSmall: isArabic()
-          ? GoogleFonts.elMessiri(
+          ? GoogleFonts.rubik(
               color: Colors.black,
             )
-          : GoogleFonts.aBeeZee(
+          : GoogleFonts.rubik(
               color: Colors.black,
             ),
     ),
@@ -201,7 +201,7 @@ class Style {
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
         textStyle: MaterialStateProperty.all(
-          GoogleFonts.aBeeZee(
+          GoogleFonts.rubik(
             color: Colors.white,
           ),
         ),
@@ -209,13 +209,13 @@ class Style {
     ),
     datePickerTheme: DatePickerThemeData(
       backgroundColor: const Color(AppColors.kDarkThemColor),
-      headerHeadlineStyle: GoogleFonts.aBeeZee(color: Colors.white),
-      headerHelpStyle: GoogleFonts.aBeeZee(color: Colors.white),
-      dayStyle: GoogleFonts.aBeeZee(color: Colors.white),
-      rangePickerHeaderHeadlineStyle: GoogleFonts.aBeeZee(color: Colors.white),
-      rangePickerHeaderHelpStyle: GoogleFonts.aBeeZee(color: Colors.white),
-      yearStyle: GoogleFonts.aBeeZee(color: Colors.white),
-      weekdayStyle: GoogleFonts.aBeeZee(color: Colors.white),
+      headerHeadlineStyle: GoogleFonts.rubik(color: Colors.white),
+      headerHelpStyle: GoogleFonts.rubik(color: Colors.white),
+      dayStyle: GoogleFonts.rubik(color: Colors.white),
+      rangePickerHeaderHeadlineStyle: GoogleFonts.rubik(color: Colors.white),
+      rangePickerHeaderHelpStyle: GoogleFonts.rubik(color: Colors.white),
+      yearStyle: GoogleFonts.rubik(color: Colors.white),
+      weekdayStyle: GoogleFonts.rubik(color: Colors.white),
       surfaceTintColor: Colors.white,
     ),
     timePickerTheme: const TimePickerThemeData(

@@ -4,13 +4,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:social_link_app/ui/config/routes/router.dart';
-import 'package:social_link_app/ui/config/routes/routes_path.dart';
-import 'package:social_link_app/ui/config/themes/themes.dart';
-import 'package:social_link_app/ui/core/cache/hive_cache.dart';
-import 'package:social_link_app/ui/core/observer/blocObserver.dart';
 import 'package:social_link_app/ui/features/authentication/controller/auth_cubit.dart';
+import 'package:social_link_app/ui/features/layout/controller/layout_cubit.dart';
+import 'package:social_link_app/ui/features/settings/controller/settings_cubit.dart';
 
+import 'config/routes/router.dart';
+import 'config/routes/routes_path.dart';
+import 'config/themes/themes.dart';
+import 'core/cache/hive_cache.dart';
+import 'core/observer/blocObserver.dart';
 import 'firebase_options.dart';
 import 'generated/l10n.dart';
 
@@ -38,10 +40,12 @@ class LinkApp extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider(create: (context) => AuthCubit()),
+            BlocProvider(create: (context) => LayoutCubit()),
+            BlocProvider(create: (context) => SettingsCubit()),
           ],
           child: SafeArea(
             child: MaterialApp(
-              initialRoute: RoutePath.login,
+              initialRoute: RoutePath.layout,
               onGenerateRoute: generateRoute,
               locale: const Locale('en', 'US'),
               localizationsDelegates: const [

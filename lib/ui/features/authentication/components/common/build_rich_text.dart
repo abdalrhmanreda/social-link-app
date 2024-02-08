@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../config/colors/app_colors.dart';
-import '../../../../core/constant/current_local.dart';
+import '../../../../../config/colors/app_colors.dart';
+import '../../../../../core/constant/current_local.dart';
 
 class CustomRichText extends StatelessWidget {
   const CustomRichText({

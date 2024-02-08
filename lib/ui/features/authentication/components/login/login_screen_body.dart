@@ -4,13 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
+import '../../../../../config/colors/app_colors.dart';
+import '../../../../../config/routes/routes_path.dart';
+import '../../../../../core/components/custom_button.dart';
+import '../../../../../core/components/custom_navigatation.dart';
+import '../../../../../core/components/progress_indector.dart';
+import '../../../../../core/constant/app_constant.dart';
 import '../../../../../generated/l10n.dart';
-import '../../../../config/colors/app_colors.dart';
-import '../../../../config/routes/routes_path.dart';
-import '../../../../core/components/custom_button.dart';
-import '../../../../core/components/custom_navigatation.dart';
-import '../../../../core/components/progress_indector.dart';
-import '../../../../core/constant/app_constant.dart';
 import '../../controller/auth_cubit.dart';
 import '../common/build_text_next_to_text_button.dart';
 import '../common/build_two_text_form_field.dart';
@@ -55,7 +55,7 @@ class LoginScreenBody extends StatelessWidget {
                         S.of(context).loginDesc,
                         style: Theme.of(context).textTheme.bodySmall!.copyWith(
                               color: Colors.grey,
-                              fontSize: 15.sp,
+                              fontSize: 14.sp,
                             ),
                         textAlign: TextAlign.center,
                       ),
