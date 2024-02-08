@@ -5,16 +5,20 @@ import 'package:gap/gap.dart';
 import '../common/container_with_text_from_feild.dart';
 
 class TitleAndTextFormFeild extends StatelessWidget {
-  const TitleAndTextFormFeild({
+  TitleAndTextFormFeild({
     super.key,
     required this.nameController,
     required this.title,
     required this.hint,
+    this.suffixPressed,
+    this.suffixIcon,
   });
 
   final TextEditingController nameController;
   final String title;
   final String hint;
+  IconData? suffixIcon;
+  VoidCallback? suffixPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +33,8 @@ class TitleAndTextFormFeild extends StatelessWidget {
         const Gap(10),
         ContainerTextFormFeild(
           isPass: false,
+          suffixIcon: suffixIcon,
+          suffixPressed: suffixPressed,
           controller: nameController,
           hint: hint,
           keyboardType: TextInputType.emailAddress,

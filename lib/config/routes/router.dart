@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:social_link_app/config/routes/routes_path.dart';
+import 'package:social_link_app/ui/features/authentication/screens/complete_profile_screen/complete_profile_screen.dart';
 import 'package:social_link_app/ui/features/layout/screens/layout.dart';
 import 'package:social_link_app/ui/features/posts/screens/posts.dart';
 import 'package:social_link_app/ui/features/profile/screens/edit_profile.dart';
@@ -25,6 +26,8 @@ Route? generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => const SettingsScreen());
     case RoutePath.editProfile:
       return MaterialPageRoute(builder: (_) => const EditProfileScreen());
+    case RoutePath.completeProfile:
+      return MaterialPageRoute(builder: (_) => const CompleteProfileScreen());
   }
   return null;
 }
