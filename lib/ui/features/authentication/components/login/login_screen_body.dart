@@ -26,11 +26,8 @@ class LoginScreenBody extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is GetUserDataSuccessState) {
-          // showToast(message: 'Login successfully', state: ToastState.SUCCESS);
           CustomNavigation.navigateByNamedTo(context, RoutePath.layout);
-        } else if (state is FailureState) {
-          // showToast(message: state.error, state: ToastState.ERROR);
-        }
+        } else if (state is FailureState) {}
       },
       builder: (context, state) {
         return SingleChildScrollView(
@@ -67,15 +64,21 @@ class LoginScreenBody extends StatelessWidget {
                         secondHint: S.of(context).loginScreenPass,
                       ),
                       const Gap(15),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Text(
-                          S.of(context).loginScreenForgetPass,
-                          style:
-                              Theme.of(context).textTheme.bodySmall!.copyWith(
-                                    color: const Color(AppColors.kGreyColor),
-                                    fontSize: 14.sp,
-                                  ),
+                      InkWell(
+                        onTap: () {
+                          CustomNavigation.navigateByNamedTo(
+                              context, RoutePath.resetPassword);
+                        },
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            S.of(context).loginScreenForgetPass,
+                            style:
+                                Theme.of(context).textTheme.bodySmall!.copyWith(
+                                      color: const Color(AppColors.kGreyColor),
+                                      fontSize: 14.sp,
+                                    ),
+                          ),
                         ),
                       ),
                       const Gap(20),
@@ -88,6 +91,8 @@ class LoginScreenBody extends StatelessWidget {
                                         email: emailController.text,
                                         password: passController.text);
                                   }
+                                  AuthCubit.get(context).resetPassword(
+                                      email: emailController.text);
                                 },
                                 text: S.of(context).loginScreenButton,
                                 height: 35.h,

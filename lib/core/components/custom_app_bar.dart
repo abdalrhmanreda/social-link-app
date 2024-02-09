@@ -7,12 +7,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.leading,
     this.actions,
     required this.color,
+    this.isCenter,
   });
 
   final Widget? title;
   final List<Widget>? actions;
   final Widget? leading;
   final int color;
+  final bool? isCenter;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +23,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: title,
       actions: actions,
       leading: leading,
+      centerTitle: isCenter ?? false,
     );
   }
 

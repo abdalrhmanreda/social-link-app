@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:toastification/toastification.dart';
+
+import '../../config/colors/app_colors.dart';
 
 enum ToastState { SUCCESS, ERROR, WARNING }
 
@@ -31,3 +35,28 @@ Color stateColor(ToastState state) {
   }
   return color;
 }
+
+void showNotificationToast({
+  required BuildContext context,
+  required String message,
+  required String title,
+  required ToastificationStyle style,
+  IconData? icon,
+}) =>
+    toastification.show(
+      context: context,
+      style: style,
+      borderRadius: BorderRadius.circular(15.r),
+      title: Text(title, style: TextStyle(fontSize: 16.sp)),
+      description: Text(message),
+      icon: icon == null
+          ? null
+          : Icon(
+              icon,
+              color: const Color(AppColors.kPrimaryColor),
+              size: 30.sp,
+            ),
+      primaryColor: const Color(AppColors.kPrimaryColor),
+      applyBlurEffect: true,
+      alignment: Alignment.topRight,
+    );

@@ -181,6 +181,17 @@ class AuthCubit extends Cubit<AuthState> {
     });
   }
 
+  void resetPassword({
+    required String email,
+  }) {
+    emit(LoadingState());
+    FirebaseAuth.instance.sendPasswordResetEmail(email: email).then((value) {
+      emit(ResetPasswordSuccessState());
+    }).catchError((error) {
+      emit(FailureState(error: error.toString()));
+    });
+  }
+
   void dispose() {
     nameController.dispose();
     emailController.dispose();

@@ -10,12 +10,12 @@ import '../components/cover_image.dart';
 class CoverAndProfileImages extends StatelessWidget {
   const CoverAndProfileImages({
     super.key,
-    required this.image,
-    required this.image2,
+    required this.cover,
+    required this.profile,
   });
 
-  final String image;
-  final String image2;
+  final String cover;
+  final String profile;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class CoverAndProfileImages extends StatelessWidget {
           Stack(
             alignment: Alignment.topRight,
             children: [
-              CoverImage(image: image),
+              CoverImage(image: cover),
               const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: ProfileActionItem(),
@@ -41,7 +41,7 @@ class CoverAndProfileImages extends StatelessWidget {
               radius: 64.r,
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               child: CircleAvatar(
-                backgroundImage: CachedNetworkImageProvider(image2),
+                backgroundImage: CachedNetworkImageProvider(profile),
                 radius: 60.0.r,
               ),
             ),

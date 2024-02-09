@@ -15,4 +15,5 @@ class RoutePath {
   static const String changeLanguage = '/changeLanguageScreen';
   static const String contactUs = '/contactUsScreen';
   static const String completeProfile = '/completeProfileScreen';
+  static const String resetPassword = '/resetPasswordScreen';
 }
