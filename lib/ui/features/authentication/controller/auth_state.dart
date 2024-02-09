@@ -17,6 +17,8 @@ class FailureState extends AuthState {
 
 class LoginSuccessState extends AuthState {}
 
+class ResetPasswordSuccessState extends AuthState {}
+
 class RegisterSuccessState extends AuthState {}
 
 class CreateUserSuccessState extends AuthState {}

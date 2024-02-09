@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:social_link_app/ui/features/authentication/controller/auth_cubit.dart';
 import 'package:social_link_app/ui/features/profile/models/counter_model.dart';
 
 import '../components/cover_and_profile_images.dart';
@@ -25,31 +27,41 @@ class ProfileScreen extends StatelessWidget {
     String image =
         'https://scontent.fcai22-4.fna.fbcdn.net/v/t39.30808-6/402197955_3536699043325945_6296573774095780653_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=783fdb&_nc_ohc=z1l83zMOZDkAX9fRO9H&_nc_ht=scontent.fcai22-4.fna&oh=00_AfCgVgSLbqHSPSe6rcx0428DQjV3bQ-nqUGP_l4tU_pHTg&oe=65C9C28C';
 
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            CoverAndProfileImages(image: image, image2: image2),
-            const NameAndBio(
-              name: 'Abdulrahman Reda',
-              bio: 'Software Engineer',
+    return BlocConsumer<AuthCubit, AuthState>(
+      listener: (context, state) {
+        // TODO: implement listener
+      },
+      builder: (context, state) {
+        return Scaffold(
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                CoverAndProfileImages(
+                    profile: AuthCubit.get(context).userModel!.profileImage!,
+                    cover: AuthCubit.get(context).userModel!.coverImage!),
+                NameAndBio(
+                  name: AuthCubit.get(context).userModel!.name!,
+                  bio: AuthCubit.get(context).userModel!.bio!,
+                ),
+                const Gap(15),
+                LikesAndPostsAndFollowers(counts: counts),
+                const Gap(15),
+                const ProfileButtons(),
+                ListView.builder(
+                  key: UniqueKey(),
+                  // Add a unique key here
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) => ListTile(
+                    title: Text('Item $index'),
+                  ),
+                  itemCount: 100,
+                )
+              ],
             ),
-            const Gap(15),
-            LikesAndPostsAndFollowers(counts: counts),
-            const Gap(15),
-            const ProfileButtons(),
-            ListView.builder(
-              key: UniqueKey(), // Add a unique key here
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) => ListTile(
-                title: Text('Item $index'),
-              ),
-              itemCount: 100,
-            )
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
