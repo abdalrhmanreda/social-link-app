@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../config/colors/app_colors.dart';
+import '../../controller/auth_cubit.dart';
 
 class ProfileImageDialog extends StatelessWidget {
   const ProfileImageDialog({
@@ -21,6 +22,7 @@ class ProfileImageDialog extends StatelessWidget {
         TextButton(
           onPressed: () {
             Navigator.pop(context);
+            AuthCubit.get(context).userRegister();
           },
           child: Text(
             'OK',

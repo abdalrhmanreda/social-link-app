@@ -9,16 +9,19 @@ class UserModel extends Equatable {
   String? uId;
   String? coverImage;
   String? bio;
+  String? username;
 
-  UserModel(
-      {this.name,
-      this.email,
-      this.profileImage,
-      this.phone,
-      this.address,
-      this.uId,
-      this.coverImage,
-      this.bio});
+  UserModel({
+    this.name,
+    this.email,
+    this.profileImage,
+    this.phone,
+    this.address,
+    this.uId,
+    this.coverImage,
+    this.bio,
+    this.username,
+  });
 
   UserModel.fromJson(Map<String, dynamic> json) {
     name = json['fullName'];
@@ -29,6 +32,8 @@ class UserModel extends Equatable {
     uId = json['uId'];
     coverImage = json['coverImage'];
     bio = json['bio'];
+
+    username = json['username'];
   }
 
   Map<String, dynamic> toJson() {
@@ -41,6 +46,8 @@ class UserModel extends Equatable {
     data['uId'] = uId;
     data['coverImage'] = coverImage;
     data['bio'] = bio;
+
+    data['username'] = username;
 
     return data;
   }

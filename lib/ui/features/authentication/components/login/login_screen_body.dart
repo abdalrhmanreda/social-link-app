@@ -26,7 +26,7 @@ class LoginScreenBody extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is GetUserDataSuccessState) {
-          CustomNavigation.navigateByNamedTo(context, RoutePath.layout);
+          CustomNavigation.navigateAndFinishNyNamed(context, RoutePath.layout);
         } else if (state is FailureState) {}
       },
       builder: (context, state) {
@@ -91,8 +91,6 @@ class LoginScreenBody extends StatelessWidget {
                                         email: emailController.text,
                                         password: passController.text);
                                   }
-                                  AuthCubit.get(context).resetPassword(
-                                      email: emailController.text);
                                 },
                                 text: S.of(context).loginScreenButton,
                                 height: 35.h,
