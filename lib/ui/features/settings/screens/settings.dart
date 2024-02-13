@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:social_link_app/config/colors/app_colors.dart';
 import 'package:social_link_app/core/components/custom_app_bar.dart';
+import 'package:social_link_app/ui/features/layout/components/profile_leading.dart';
 import 'package:social_link_app/ui/features/settings/controller/settings_cubit.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -18,6 +19,7 @@ class SettingsScreen extends StatelessWidget {
         return Scaffold(
           appBar: const CustomAppBar(
             title: Text('Settings'),
+            leading: ProfileLeading(),
             color: AppColors.kWhiteColor,
           ),
           body: ListView(

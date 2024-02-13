@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:social_link_app/config/colors/app_colors.dart';
+import 'package:social_link_app/core/components/custom_app_bar.dart';
 import 'package:social_link_app/ui/features/layout/controller/layout_cubit.dart';
 
 import '../components/custom_fab.dart';
@@ -16,6 +18,13 @@ class LayoutScreen extends StatelessWidget {
       },
       builder: (context, state) {
         return Scaffold(
+          appBar: CustomAppBar(
+            title: LayoutCubit.get(context)
+                .leading[LayoutCubit.get(context).currentIndex],
+            actions: LayoutCubit.get(context)
+                .actions[LayoutCubit.get(context).currentIndex],
+            color: AppColors.kWhiteColor,
+          ),
           extendBody: true,
           body: LayoutCubit.get(context)
               .screens[LayoutCubit.get(context).currentIndex],

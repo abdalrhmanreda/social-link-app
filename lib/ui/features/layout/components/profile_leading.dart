@@ -12,7 +12,9 @@ class ProfileLeading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.pop(context);
+      },
       child: CircleAvatar(
         radius: 15.r,
         backgroundColor: const Color(AppColors.kWhiteColor),

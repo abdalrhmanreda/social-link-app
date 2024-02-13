@@ -36,9 +36,9 @@ class ProfileScreen extends StatelessWidget {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                CoverAndProfileImages(
-                    profile: AuthCubit.get(context).userModel!.profileImage!,
-                    cover: AuthCubit.get(context).userModel!.coverImage!),
+                ProfileImages(
+                  profile: AuthCubit.get(context).userModel!.profileImage!,
+                ),
                 NameAndBio(
                   name: AuthCubit.get(context).userModel!.name!,
                   bio: AuthCubit.get(context).userModel!.bio!,
@@ -46,7 +46,9 @@ class ProfileScreen extends StatelessWidget {
                 const Gap(15),
                 LikesAndPostsAndFollowers(counts: counts),
                 const Gap(15),
-                const ProfileButtons(),
+                ProfileButtons(
+                  uId: AuthCubit.get(context).userModel!.uId!,
+                ),
                 ListView.builder(
                   key: UniqueKey(),
                   // Add a unique key here

@@ -21,6 +21,7 @@ class AuthCubit extends Cubit<AuthState> {
   var passController = TextEditingController();
   var nameController = TextEditingController();
   var phoneController = TextEditingController();
+  var usernameController = TextEditingController();
   String profileBlankImage =
       'https://img.freepik.com/free-vector/isolated-young-handsome-man-set-different-poses-white-background-illustration_632498-649.jpg?w=740&t=st=1707406336~exp=1707406936~hmac=9da05bc201714d21acbc0f6a462f22bdc59d34670ddce46b897d60c00093be05';
 
@@ -34,7 +35,6 @@ class AuthCubit extends Cubit<AuthState> {
         .then((value) {
       getUserData(userId: HiveCache.getData(key: 'userId'));
     }).catchError((error) {
-      print(error.toString());
       emit(FailureState(error: error.toString()));
     });
   }
@@ -56,7 +56,8 @@ class AuthCubit extends Cubit<AuthState> {
             email: emailController.text, password: passController.text)
         .then((value) {
       uploadImage(uId: value.user!.uid);
-      HiveCache.saveData(key: 'userId', value: value.user!.uid);
+
+      HiveCache.saveData(key: 'userId', value: value.user!.uid.toString());
       userId = value.user!.uid;
     }).catchError((error) {
       emit(FailureState(error: error.toString()));
@@ -69,12 +70,14 @@ class AuthCubit extends Cubit<AuthState> {
     required String phone,
     required String uId,
     required String address,
+    required String username,
     required String profileImage,
     String? coverImage,
     String? bio,
   }) {
     UserModel userModel = UserModel(
       email: email,
+      username: username,
       name: name,
       phone: phone,
       uId: uId,
@@ -93,7 +96,6 @@ class AuthCubit extends Cubit<AuthState> {
       getUserData(userId: uId);
       emit(CreateUserSuccessState());
     }).catchError((error) {
-      print(error.toString());
       emit(FailureState(error: error.toString()));
     });
   }
@@ -107,8 +109,6 @@ class AuthCubit extends Cubit<AuthState> {
         .get()
         .then((value) {
       userModel = UserModel.fromJson(value.data()!);
-
-      print(userModel!.email);
 
       emit(GetUserDataSuccessState());
     }).catchError((error) {
@@ -124,7 +124,6 @@ class AuthCubit extends Cubit<AuthState> {
       profilePhoto = File(pickedFile.path);
       emit(PickProfileImageSuccessState());
     } else {
-      print('No Image Selected');
       emit(FailureState(error: 'error'));
     }
   }
@@ -146,7 +145,9 @@ class AuthCubit extends Cubit<AuthState> {
           uId: uId!,
           address: addressController.text,
           profileImage: value,
+          username: usernameController.text,
         );
+        profilePhoto = null;
         emit(UploadProfileImageSuccessState());
       });
     }).catchError((error) {
@@ -154,28 +155,20 @@ class AuthCubit extends Cubit<AuthState> {
     });
   }
 
-  void updateUserData({
-    String? name,
-    String? email,
-    String? phone,
-    String? address,
-    String? profileImage,
+  void updateProfileImage({
+    String? uId,
   }) {
-    UserModel model = UserModel(
-      name: name,
-      email: email,
-      phone: phone,
-      address: address,
-      profileImage: profileImage ?? userModel!.profileImage,
-    );
     emit(LoadingState());
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(userId)
-        .update(model.toJson())
-        .then((value) {
-      getUserData(userId: userId!);
-      emit(UpdateUserDataSuccessState());
+    firebase_storage.FirebaseStorage.instance
+        .ref()
+        .child('users/$uId/${Uri.file(profilePhoto!.path).pathSegments.last}')
+        .putFile(profilePhoto!)
+        .then((p0) {
+      p0.ref.getDownloadURL().then((value) {
+        updateUserData(profileImage: value);
+        profilePhoto = null;
+        emit(UploadProfileImageSuccessState());
+      });
     }).catchError((error) {
       emit(FailureState(error: error.toString()));
     });
@@ -188,6 +181,46 @@ class AuthCubit extends Cubit<AuthState> {
     FirebaseAuth.instance.sendPasswordResetEmail(email: email).then((value) {
       emit(ResetPasswordSuccessState());
     }).catchError((error) {
+      emit(FailureState(error: error.toString()));
+    });
+  }
+
+  void updateUserData({
+    String? name,
+    String? email,
+    String? phone,
+    String? address,
+    String? profileImage,
+    String? coverImage,
+    String? bio,
+    String? uId,
+  }) {
+    UserModel model = UserModel(
+      email: email ?? userModel!.email,
+      name: name ?? userModel!.name,
+      phone: phone ?? userModel!.phone,
+      uId: uId ?? userModel!.uId,
+      address: address ?? userModel!.address,
+      profileImage: profileImage ?? userModel!.profileImage,
+      coverImage: profileBlankImage ?? userModel!.coverImage,
+      bio: bio ?? userModel!.bio,
+    );
+
+    emit(LoadingState());
+
+    // Use set method instead of update
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .set(
+            model.toJson(),
+            SetOptions(
+                merge: true)) // Use merge option to update without overwriting
+        .then((value) {
+      emit(UpdateUserDataSuccessState());
+      getUserData(userId: userId!);
+    }).catchError((error) {
+      print(error.toString());
       emit(FailureState(error: error.toString()));
     });
   }

@@ -4,8 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:social_link_app/core/constant/strings.dart';
 import 'package:social_link_app/ui/features/authentication/controller/auth_cubit.dart';
 import 'package:social_link_app/ui/features/layout/controller/layout_cubit.dart';
+import 'package:social_link_app/ui/features/posts/controller/post_cubit.dart';
 import 'package:social_link_app/ui/features/settings/controller/settings_cubit.dart';
 
 import 'config/routes/router.dart';
@@ -21,9 +23,12 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  Bloc.observer = MyBlocObserver();
   await Hive.initFlutter();
   await HiveCache.openHive();
+  userId = HiveCache.getData(key: 'userId');
+  print(userId);
+  Bloc.observer = MyBlocObserver();
+
   runApp(const LinkApp());
 }
 
@@ -42,6 +47,7 @@ class LinkApp extends StatelessWidget {
             BlocProvider(create: (context) => AuthCubit()),
             BlocProvider(create: (context) => LayoutCubit()),
             BlocProvider(create: (context) => SettingsCubit()),
+            BlocProvider(create: (context) => PostCubit()),
           ],
           child: SafeArea(
             child: MaterialApp(

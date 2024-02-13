@@ -16,4 +16,5 @@ class RoutePath {
   static const String contactUs = '/contactUsScreen';
   static const String completeProfile = '/completeProfileScreen';
   static const String resetPassword = '/resetPasswordScreen';
+  static const String qrCodeScreen = '/qrCodeScreen';
 }

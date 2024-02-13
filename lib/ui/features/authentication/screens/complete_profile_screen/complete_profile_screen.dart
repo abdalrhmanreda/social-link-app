@@ -63,6 +63,12 @@ class CompleteProfileScreen extends StatelessWidget {
                     },
                     hint: 'your address',
                   ),
+                  Gap(10.h),
+                  TitleAndTextFormFeild(
+                    title: 'username',
+                    nameController: AuthCubit.get(context).usernameController,
+                    hint: 'abdalrhman2024',
+                  ),
                   Gap(15.h),
                   ConditionalBuilder(
                       condition: state is! LoadingState,

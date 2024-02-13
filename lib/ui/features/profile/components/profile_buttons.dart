@@ -4,13 +4,16 @@ import 'package:social_link_app/config/colors/app_colors.dart';
 import 'package:social_link_app/config/routes/routes_path.dart';
 import 'package:social_link_app/core/components/custom_navigatation.dart';
 import 'package:social_link_app/generated/assets.dart';
+import 'package:social_link_app/ui/features/qr_code/screens/qr_code_screen.dart';
 
 import '../components/custom_profile_button.dart';
 
 class ProfileButtons extends StatelessWidget {
   const ProfileButtons({
     super.key,
+    required this.uId,
   });
+  final String uId;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +32,9 @@ class ProfileButtons extends StatelessWidget {
           isQr: false,
         ),
         CustomProfileButton(
-          onTap: () {},
+          onTap: () {
+            CustomNavigation.navigateTo(context, QrCodeScreen(uId: uId));
+          },
           text: 'QR-Code',
           icon: const ImageIcon(
             AssetImage(Assets.iconsQr),

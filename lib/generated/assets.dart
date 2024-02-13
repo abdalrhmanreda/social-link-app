@@ -6,4 +6,9 @@ class Assets {
   static const String iconsLogo = 'assets/images/icons/logo.svg';
   static const String iconsQr = 'assets/images/icons/qr.png';
   static const String iconsRestPass = 'assets/images/icons/rest_pass.svg';
+  static const String storyAbdo = 'assets/images/story/abdo.jpeg';
+  static const String storyCat = 'assets/images/story/cat.jpeg';
+  static const String storyFlutter = 'assets/images/story/flutter.png';
+  static const String storyPhoto1707436314 =
+      'assets/images/story/photo1707436314.jpeg';
 }

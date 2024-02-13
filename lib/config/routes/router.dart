@@ -22,7 +22,7 @@ Route? generateRoute(RouteSettings settings) {
     case RoutePath.layout:
       return MaterialPageRoute(builder: (_) => const LayoutScreen());
     case RoutePath.postsScreen:
-      return MaterialPageRoute(builder: (_) => const PostsScreen());
+      return MaterialPageRoute(builder: (_) => const CreatePostsScreen());
     case RoutePath.settingsScreen:
       return MaterialPageRoute(builder: (_) => const SettingsScreen());
     case RoutePath.editProfile:
